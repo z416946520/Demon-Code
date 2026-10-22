@@ -1,0 +1,254 @@
+/* Demon Code — Codex-flavoured shell.
+ *
+ * Loaded after every upstream sheet so it only overrides aliases: component
+ * CSS keeps reading the same variables, while the palette, geometry, and
+ * typography collapse to a monochrome terminal surface with one ember accent. */
+
+:root {
+  --demon-ink: #0a0a0c;
+  --demon-ink-soft: #101013;
+  --demon-panel: #141418;
+  --demon-panel-2: #1a1a20;
+  --demon-panel-3: #212128;
+  --demon-line: rgba(255, 255, 255, 0.09);
+  --demon-line-strong: rgba(255, 255, 255, 0.16);
+  --demon-text: #f1f1f2;
+  --demon-text-2: #a3a3ac;
+  --demon-text-3: #75757e;
+  --demon-ember: #ff5a4e;
+  --demon-ember-soft: rgba(255, 90, 78, 0.14);
+  --demon-green: #55d68b;
+  --demon-amber: #e3b341;
+  --demon-blue: #7aa2ff;
+  --dsw-font-family-text-default: 'Inter', 'Segoe UI Variable Text', 'Segoe UI', 'PingFang SC',
+    'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+  --dsh-font-family-code-default: 'JetBrains Mono', 'Cascadia Code', 'SF Mono', Consolas,
+    'Liberation Mono', 'PingFang SC', 'Microsoft YaHei', monospace;
+  --dsw-font-family-brand: 'JetBrains Mono', 'Cascadia Code', Consolas, monospace;
+  --dsw-radius-xs: 2px;
+  --dsw-radius-sm: 4px;
+  --dsw-radius-md: 6px;
+  --dsw-radius-lg: 8px;
+  --dsw-radius-xl: 10px;
+  --dsw-radius-panel: 12px;
+}
+
+body {
+  letter-spacing: -0.005em;
+  background-image:
+    radial-gradient(1200px 600px at 78% -18%, rgba(255, 90, 78, 0.055), transparent 62%),
+    radial-gradient(900px 520px at 12% 112%, rgba(122, 162, 255, 0.04), transparent 60%);
+  background-attachment: fixed;
+}
+
+body[data-ds-dark-theme] {
+  --dsw-static-neutral-bluish-00: #ffffff;
+  --dsw-static-neutral-bluish-50: #f4f4f5;
+  --dsw-static-neutral-bluish-60: #ececee;
+  --dsw-static-neutral-bluish-75: #e2e2e6;
+  --dsw-static-neutral-bluish-100: #d6d6dc;
+  --dsw-static-neutral-bluish-150: #c9c9d1;
+  --dsw-static-neutral-bluish-200: #bcbcc4;
+  --dsw-static-neutral-bluish-300: #a8a8b1;
+  --dsw-static-neutral-bluish-400: #94949e;
+  --dsw-static-neutral-bluish-500: #80808a;
+  --dsw-static-neutral-bluish-600: #6c6c76;
+  --dsw-static-neutral-bluish-700: #56565f;
+  --dsw-static-neutral-bluish-750: #44444c;
+  --dsw-static-neutral-bluish-800: #34343b;
+  --dsw-static-neutral-bluish-850: #26262c;
+  --dsw-static-neutral-bluish-875: #1e1e23;
+  --dsw-static-neutral-bluish-900: #18181c;
+  --dsw-static-neutral-bluish-950: var(--demon-ink);
+  --dsw-static-neutral-bluish-1000: #000000;
+  --dsw-static-neutral-50: #f6f6f6;
+  --dsw-static-neutral-100: #ececec;
+  --dsw-static-neutral-200: #d8d8d8;
+  --dsw-static-neutral-300: #b9b9b9;
+  --dsw-static-neutral-400: #949494;
+  --dsw-static-neutral-500: #767676;
+  --dsw-static-neutral-550: #616161;
+  --dsw-static-neutral-600: #4c4c4c;
+  --dsw-static-neutral-700: #353535;
+  --dsw-static-neutral-800: #232323;
+  --dsw-static-neutral-850: #1a1a1a;
+  --dsw-static-neutral-900: #0c0c0c;
+  --dsw-static-deepseek-100: #ffd9d5;
+  --dsw-static-deepseek-200: #ffc0ba;
+  --dsw-static-deepseek-300: #ffa39b;
+  --dsw-static-deepseek-400: #ff7d73;
+  --dsw-static-deepseek-450: var(--demon-ember);
+  --dsw-static-deepseek-500: #ef4a3f;
+  --dsw-static-deepseek-800: #4b1714;
+  --dsw-static-deepseek-900: #35100e;
+  --dsw-static-blue-300: #b7c9ff;
+  --dsw-static-blue-400: #94b0ff;
+  --dsw-static-blue-450: #7aa2ff;
+  --dsw-static-blue-500: #5f8bff;
+  --dsw-static-green-400: #6fe3a1;
+  --dsw-static-green-500: var(--demon-green);
+  --dsw-static-green-900: #10301f;
+  --dsw-static-red-400: #ff8c84;
+  --dsw-static-red-500: #ff6b62;
+  --dsw-static-red-600: #ef4a3f;
+  --dsw-static-red-900: #35100e;
+  --dsw-static-amber-400: #f0c45c;
+  --dsw-static-amber-500: var(--demon-amber);
+  --dsw-static-amber-600: #c99b2f;
+  --dsw-static-amber-900: #2b2412;
+
+  --dsw-alias-bg-base: var(--demon-ink);
+  --dsw-alias-bg-document-preview: var(--demon-ink);
+  --dsw-alias-bg-layer-1: var(--demon-ink-soft);
+  --dsw-alias-bg-layer-2: var(--demon-panel);
+  --dsw-alias-bg-layer-3: var(--demon-panel-2);
+  --dsw-alias-bg-mask-1: rgba(0, 0, 0, 0.62);
+  --dsw-alias-bg-mask-2: rgba(0, 0, 0, 0.26);
+  --dsw-alias-bg-mask-3: rgba(0, 0, 0, 0.55);
+  --dsw-alias-bg-module-platform: var(--demon-panel);
+  --dsw-alias-bg-multi-select: var(--demon-panel-2);
+  --dsw-alias-bg-overlay: var(--demon-panel-3);
+  --dsw-alias-bg-skeleton: rgba(255, 255, 255, 0.06);
+  --dsw-alias-border-l1: var(--demon-line);
+  --dsw-alias-border-l2-darkmode-thin: var(--demon-line);
+  --dsw-alias-border-l2: var(--demon-line);
+  --dsw-alias-border-l3: var(--demon-line-strong);
+  --dsw-alias-border-l4: rgba(255, 255, 255, 0.24);
+  --dsw-alias-border-inverted: rgba(255, 255, 255, 0.07);
+  --dsw-alias-border-inverted2: rgba(255, 255, 255, 0.1);
+
+  --dsw-alias-label-primary: var(--demon-text);
+  --dsw-alias-label-primary-dimmed: #dcdce2;
+  --dsw-alias-label-primary-foreground: #0c0c0e;
+  --dsw-alias-label-primary-inverted: var(--demon-panel-3);
+  --dsw-alias-label-secondary: var(--demon-text-2);
+  --dsw-alias-label-tertiary: var(--demon-text-3);
+  --dsw-alias-label-caption: #6b6b74;
+  --dsw-alias-label-dimmed: #505058;
+  --dsw-alias-label-primary-bluish: var(--demon-text);
+  --dsw-alias-menu-icon: var(--demon-text-2);
+  --dsw-alias-link: var(--demon-blue);
+  --dsw-alias-label-shimmer: rgba(255, 255, 255, 0.42);
+
+  --dsw-alias-brand-primary: #f1f1f2;
+  --dsw-alias-brand-text: var(--demon-ember);
+  --dsw-alias-brand-primary-invert: #0b0b0d;
+  --dsw-alias-button-primary-fill: #f1f1f2;
+  --dsw-alias-button-primary-hover: #ffffff;
+  --dsw-alias-button-primary-dimmed: #3a3a42;
+  --dsw-alias-button-contrast-fill: #f1f1f2;
+  --dsw-alias-button-elevated-fill: var(--demon-panel-2);
+  --dsw-alias-button-floating-fill: var(--demon-panel);
+  --dsw-alias-button-floating-hover: var(--demon-panel-2);
+  --dsw-alias-button-ghost-active-fill: var(--demon-panel-3);
+  --dsw-alias-button-ghost-active-hover: #292930;
+  --dsw-alias-button-ghost-active-border: #3d3d46;
+  --dsw-alias-button-info-fill: var(--demon-ember);
+  --dsw-alias-button-info-hover: #ff746a;
+
+  --dsw-alias-interactive-bg-hover: rgba(255, 255, 255, 0.055);
+  --dsw-alias-interactive-bg-hover-solid: var(--demon-panel-2);
+  --dsw-alias-interactive-bg-hover-accent: rgba(255, 255, 255, 0.1);
+  --dsw-alias-interactive-bg-hover-danger: rgba(255, 90, 78, 0.12);
+  --dsw-alias-interactive-bg-active: rgba(255, 255, 255, 0.09);
+
+  --dsw-alias-markdown-code-block: #0e0e11;
+  --dsw-alias-markdown-code-block-banner: #121216;
+  --dsw-alias-markdown-code-segment-selected: #202027;
+  --dsw-alias-markdown-code-segment-unselected: #121216;
+  --dsw-alias-markdown-inline-code: #1d1d23;
+  --dsw-alias-markdown-placeholder: #202027;
+  --dsw-alias-markdown-tag: #232329;
+  --dsw-alias-markdown-citation: #1d1d23;
+  --dsw-alias-turn-trigger-bg: #121216;
+  --dsw-alias-turn-trigger-bg-hover: #1a1a20;
+
+  --dsw-alias-scrollbar-bg-l1: #303038;
+  --dsw-alias-scrollbar-bg-l2: #36363e;
+  --dsw-alias-scrollbar-hover-l1: #45454f;
+  --dsw-alias-scrollbar-hover-l2: #4d4d57;
+
+  --dsw-alias-state-business-primary: var(--demon-ember);
+  --dsw-alias-state-business-tertiary: var(--demon-ember-soft);
+  --dsw-alias-state-success-primary: var(--demon-green);
+  --dsw-alias-state-success-secondary: #8cebb3;
+  --dsw-alias-state-success-tertiary: rgba(85, 214, 139, 0.14);
+  --dsw-alias-state-error-primary: #ff6b62;
+  --dsw-alias-state-error-secondary: #ff9a93;
+  --dsw-alias-state-warn-primary: var(--demon-amber);
+  --dsw-alias-state-warn-secondary: #f0c45c;
+  --dsw-alias-state-warn-tertiary: rgba(227, 179, 65, 0.14);
+  --dsw-alias-state-warn-label: #e9c878;
+  --dsw-alias-state-idle-primary: #4b4b54;
+
+  --dsw-alias-code-diff-added: rgba(85, 214, 139, 0.13);
+  --dsw-alias-code-diff-deleted: rgba(255, 90, 78, 0.13);
+  --dsw-alias-file-diff-added-bg: #0f1d16;
+  --dsw-alias-file-diff-added-gutter: #13241a;
+  --dsw-alias-file-diff-added-marker: #55d68b;
+  --dsw-alias-file-diff-deleted-bg: #231211;
+  --dsw-alias-file-diff-deleted-gutter: #2b1614;
+  --dsw-alias-file-diff-deleted-marker: #ff6b62;
+
+  --dsw-alias-toast-bg: #1d1d23;
+  --dsw-alias-toast-label: var(--demon-text);
+  --dsw-alias-tooltip-bg: #232329;
+  --dsw-alias-tooltip-key-bg: #32323a;
+  --dsw-specific-input-major: #0d0d10;
+  --dsw-specific-bubble: #17171b;
+  --dsw-specific-bubble-highlight: #26262d;
+  --dsw-specific-login-input: #111114;
+  --dsw-menu-surface-fill: rgba(20, 20, 24, 0.92);
+  --dsw-alias-menu-group-header-fill: rgba(20, 20, 24, 0.98);
+  --dsw-specific-selector: #17171b;
+  --dsw-specific-sidebar-fill: #0c0c0e;
+  --dsw-specific-sidebar-nav-item-active: #1b1b21;
+  --dsw-specific-sidebar-nav-item-hover: #15151a;
+  --dsw-specific-sidebar-nav-item-active-accent: var(--demon-ember-soft);
+  --dsw-specific-tip: #121216;
+}
+
+/* Mono micro-labels and quiet chrome, the part of Codex that is typography
+ * rather than colour. Scoped to chrome roles so message prose keeps its sans. */
+body[data-ds-dark-theme] button,
+body[data-ds-dark-theme] [role='tab'],
+body[data-ds-dark-theme] [data-sidebar-section-title],
+body[data-ds-dark-theme] .dsw-label-caption {
+  letter-spacing: 0.01em;
+}
+
+body[data-ds-dark-theme] hr {
+  border-color: var(--demon-line);
+}
+
+::selection {
+  background: rgba(255, 90, 78, 0.28);
+  color: #ffffff;
+}
+
+/* Sharper composer and cards; upstream radii are deliberately generous. */
+body[data-ds-dark-theme] [data-composer],
+body[data-ds-dark-theme] [data-chat-composer] {
+  border-radius: 8px;
+  border-color: var(--demon-line-strong);
+  background: rgba(15, 15, 18, 0.92);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 14px 40px rgba(0, 0, 0, 0.28);
+}
+
+body[data-ds-dark-theme] [data-message-user] {
+  background: #1b1b21;
+  border-color: var(--demon-line);
+}
+
+body[data-ds-dark-theme] [data-tool-card] {
+  border-radius: 6px;
+  border-color: var(--demon-line);
+  background: #101014;
+}
+
+/* The official mark is recoloured to the ember accent without shipping a
+ * second asset: monochrome marks inherit, multi-colour glyphs keep shape. */
+body[data-ds-dark-theme] [data-brand-mark] svg,
+body[data-ds-dark-theme] [data-brand-logo] svg {
+  color: var(--demon-ember);
+}

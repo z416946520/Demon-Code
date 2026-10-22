@@ -32,6 +32,7 @@
         <a href="#browser">浏览器</a>
         <a href="#models">模型</a>
         <a href="#plugins">插件</a>
+        <a href="#update">更新</a>
         <a href="#install">下载</a>
       </nav>
       <div class="nav-actions">
@@ -301,10 +302,41 @@
       </div>
     </section>
 
+    <section class="section section-alt" id="update">
+      <div class="container split">
+        <div class="split-copy reveal">
+          <p class="eyebrow">07 / UPDATE</p>
+          <h2>更新自己，<br />不用重新下载。</h2>
+          <p>
+            启动后自动读取 GitHub Releases 的版本号。发现新版本时下载对应平台资产，
+            用 <code>SHA256SUMS.txt</code> 校验，退出后静默安装并重启。
+          </p>
+          <ul class="check-list">
+            <li>语义版本比较 + 内部 Build ID</li>
+            <li>发布资产 SHA-256 校验</li>
+            <li>安装版：静默安装并重启</li>
+            <li>便携版：替换目录并保留 <code>.old</code> 备份</li>
+          </ul>
+          <a class="text-link" href="https://github.com/z416946520/Demon-Code/releases" target="_blank" rel="noreferrer">查看 Releases →</a>
+        </div>
+        <div class="update-card reveal" aria-label="自动更新流程">
+          <div class="update-head"><span>DEMON CODE / UPDATE</span><span class="update-live">LIVE</span></div>
+          <div class="update-body">
+            <div class="update-row"><span class="c-dim">current</span><code>0.2.1-rc.2</code><span class="c-dim">build 20261022.1</span></div>
+            <div class="update-row"><span class="c-dim">github</span><code class="c-green">0.2.1-rc.3</code><span class="c-dim">release</span></div>
+            <div class="update-bar"><i></i></div>
+            <div class="update-row"><span class="c-dim">verify</span><code>sha256 ok</code><span class="c-green">✓</span></div>
+            <div class="update-row"><span class="c-dim">install</span><code>silent / restart</code><span class="c-green">✓</span></div>
+          </div>
+          <div class="update-foot">next check · 10 min</div>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="install">
       <div class="container">
         <header class="section-head reveal">
-          <p class="eyebrow">07 / INSTALL</p>
+          <p class="eyebrow">08 / INSTALL</p>
           <h2>三十秒开始。</h2>
           <p>Windows 10/11，安装包或便携包，不需要管理员权限。数据默认在 <code>%USERPROFILE%\.dsh</code>。</p>
         </header>
@@ -314,20 +346,20 @@
             <h3>Windows 安装包</h3>
             <p>274 MB · 双击运行。未签名，SmartScreen 提示时选“更多信息 → 仍要运行”。</p>
             <div class="copy-row">
-              <code>demon-code-0.2.1-rc.2-win-x64-unsigned.exe</code>
-              <button class="copy-btn" data-copy="demon-code-0.2.1-rc.2-win-x64-unsigned.exe" aria-label="复制文件名">复制</button>
+              <code>demon-code-0.2.1-rc.2.20261022.1-win-x64-unsigned.exe</code>
+              <button class="copy-btn" data-copy="demon-code-0.2.1-rc.2.20261022.1-win-x64-unsigned.exe" aria-label="复制文件名">复制</button>
             </div>
-            <a class="btn btn-primary btn-block" href="https://github.com/z416946520/Demon-Code/releases/download/v0.2.1-rc.2/demon-code-0.2.1-rc.2-win-x64-unsigned.exe" target="_blank" rel="noreferrer">下载安装包</a>
+            <a class="btn btn-primary btn-block" href="https://github.com/z416946520/Demon-Code/releases/download/v0.2.1-rc.2.20261022.1/demon-code-0.2.1-rc.2.20261022.1-win-x64-unsigned.exe" target="_blank" rel="noreferrer">下载安装包</a>
           </article>
           <article class="install-card reveal">
             <div class="install-top"><span class="tag tag-outline">PORTABLE</span><span class="mono-label">ZIP</span></div>
             <h3>便携压缩包</h3>
             <p>360 MB · 解压到任意目录，运行 <code>Demon Code.exe</code>。不写安装记录。</p>
             <div class="copy-row">
-              <code>Demon-Code-0.2.1-rc.2-win-x64-portable.zip</code>
-              <button class="copy-btn" data-copy="Demon-Code-0.2.1-rc.2-win-x64-portable.zip" aria-label="复制文件名">复制</button>
+              <code>Demon-Code-0.2.1-rc.2.20261022.1-win-x64-portable.zip</code>
+              <button class="copy-btn" data-copy="Demon-Code-0.2.1-rc.2.20261022.1-win-x64-portable.zip" aria-label="复制文件名">复制</button>
             </div>
-            <a class="btn btn-ghost btn-block" href="https://github.com/z416946520/Demon-Code/releases/download/v0.2.1-rc.2/Demon-Code-0.2.1-rc.2-win-x64-portable.zip" target="_blank" rel="noreferrer">下载便携包</a>
+            <a class="btn btn-ghost btn-block" href="https://github.com/z416946520/Demon-Code/releases/download/v0.2.1-rc.2.20261022.1/Demon-Code-0.2.1-rc.2.20261022.1-win-x64-portable.zip" target="_blank" rel="noreferrer">下载便携包</a>
           </article>
           <article class="install-card reveal">
             <div class="install-top"><span class="tag tag-outline">SOURCE</span><span class="mono-label">DEV</span></div>
@@ -348,7 +380,7 @@
     <section class="section section-alt" id="faq">
       <div class="container faq-wrap">
         <header class="section-head reveal">
-          <p class="eyebrow">08 / FAQ</p>
+          <p class="eyebrow">09 / FAQ</p>
           <h2>常见问题</h2>
         </header>
         <details class="reveal">

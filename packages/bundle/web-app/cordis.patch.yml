@@ -597,3 +597,19 @@
         defaultTimeoutMs: 30000
         maxChars: 200000
         insecureTls: false
+
+# Experts, managed skills, and MCP connectors. The host half injects a selected
+# expert's persona and owns the private skill library; the client half is the
+# Agent Hub settings page.
+- insert:
+    - id: agent-hub
+      name: '@deepseek-ai/dsh-client-ui-agent-hub'
+
+# Codex-style workspace tree, session search, and turn navigation. The plugin
+# keeps the official sidebar/settings shells and only contributes client
+# rendering through the existing slots.
+- insert:
+    - id: michengai-codex-ui-session-title
+      name: '@michengai/dsh-codex-ui/session-title'
+    - id: codex-ui
+      name: '@michengai/dsh-codex-ui'

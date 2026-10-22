@@ -252,3 +252,204 @@ body[data-ds-dark-theme] [data-brand-mark] svg,
 body[data-ds-dark-theme] [data-brand-logo] svg {
   color: var(--demon-ember);
 }
+
+/* ── Theme skins and the ambient wash ──────────────────────────────────────
+   The presenter publishes the resolved theme id on body[data-ds-theme]. Each
+   skin adds one fixed, pointer-transparent gradient layer above the opaque
+   app surfaces; only transform/opacity animate, so the cost is one composited
+   layer and no JS per frame. `prefers-reduced-motion` stops it entirely. */
+
+body[data-ds-theme]::after {
+  content: '';
+  position: fixed;
+  inset: -18%;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.9;
+  transform: translate3d(0, 0, 0) scale(1.02);
+  animation: demon-ambient-drift 28s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+body[data-ds-theme='light']::after,
+body[data-ds-theme='dark']::after {
+  content: none;
+}
+
+body[data-ds-theme='obsidian']::after {
+  background:
+    radial-gradient(42% 38% at 82% 6%, rgba(255, 90, 78, 0.11), transparent 70%),
+    radial-gradient(38% 34% at 12% 92%, rgba(122, 162, 255, 0.08), transparent 72%);
+}
+
+body[data-ds-theme='ember']::after {
+  background:
+    radial-gradient(44% 40% at 78% 10%, rgba(255, 122, 69, 0.15), transparent 70%),
+    radial-gradient(40% 36% at 8% 88%, rgba(255, 178, 102, 0.07), transparent 70%);
+  animation-duration: 32s;
+}
+
+body[data-ds-theme='aurora']::after {
+  background:
+    radial-gradient(44% 38% at 84% 4%, rgba(85, 214, 194, 0.13), transparent 68%),
+    radial-gradient(42% 36% at 10% 90%, rgba(122, 162, 255, 0.12), transparent 70%),
+    radial-gradient(28% 24% at 48% 48%, rgba(180, 120, 255, 0.05), transparent 74%);
+  animation-duration: 24s;
+}
+
+body[data-ds-theme='graphite']::after {
+  background:
+    radial-gradient(46% 40% at 80% 6%, rgba(154, 167, 184, 0.13), transparent 70%),
+    radial-gradient(38% 34% at 8% 92%, rgba(122, 162, 255, 0.06), transparent 72%);
+  animation-duration: 36s;
+}
+
+body[data-ds-theme='sakura']::after {
+  background:
+    radial-gradient(44% 38% at 82% 6%, rgba(255, 126, 182, 0.14), transparent 70%),
+    radial-gradient(40% 36% at 10% 92%, rgba(255, 170, 120, 0.06), transparent 72%);
+  animation-duration: 30s;
+}
+
+@keyframes demon-ambient-drift {
+  from { transform: translate3d(-2.2%, -1.4%, 0) scale(1.04); }
+  to { transform: translate3d(2.2%, 1.6%, 0) scale(1.01); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-ds-theme]::after {
+    animation: none;
+    transform: none;
+  }
+}
+
+/* Warm selection and a quiet accent on the scrollbar thumb. */
+::selection {
+  background: rgba(255, 90, 78, 0.26);
+  color: var(--dsw-alias-label-primary);
+}
+
+body[data-ds-theme] :focus-visible {
+  outline-color: var(--dsw-alias-brand-primary);
+}
+
+/* ── Codex UI sidebar alignment ───────────────────────────────────────────
+   The community sidebar ships its own green-grey palette and an inline
+   DeepSeek wordmark SVG. Keep its structure and interactions, but project the
+   Demon palette and wordmark through the same tokens every other surface uses. */
+body[data-ds-theme] .dcu-root {
+  --dcu-sidebar-background: var(--dsw-specific-sidebar-fill);
+  --dcu-sidebar-primary: var(--dsw-alias-label-primary);
+  --dcu-sidebar-secondary: var(--dsw-alias-label-secondary);
+  --dcu-sidebar-tertiary: var(--dsw-alias-label-tertiary);
+  --dcu-sidebar-navigation: var(--dsw-alias-label-secondary);
+  --dcu-sidebar-icon: var(--dsw-alias-label-tertiary);
+  --dcu-sidebar-hover: var(--dsw-alias-interactive-bg-hover);
+  --dcu-sidebar-border: var(--dsw-alias-border-l1);
+  --dcu-tip-bg: var(--dsw-alias-bg-overlay);
+  --dcu-tip-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  font-family: var(--dsw-font-family-text-default);
+}
+
+body[data-ds-theme] .dcu-brand {
+  gap: 0;
+}
+
+body[data-ds-theme] .dcu-brand svg {
+  display: none;
+}
+
+body[data-ds-theme] .dcu-brand::before {
+  content: 'DEMON CODE';
+  color: var(--dsw-alias-label-primary);
+  font-family: var(--dsw-font-family-brand);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  line-height: 24px;
+}
+
+body[data-ds-theme] .dcu-brand::after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  margin-left: 7px;
+  border-radius: 2px;
+  background: var(--dsw-alias-brand-primary);
+  box-shadow: 0 0 10px var(--dsw-alias-brand-primary);
+}
+
+body[data-ds-theme] .dcu-extension-items button {
+  color: var(--dsw-alias-label-secondary);
+}
+
+body[data-ds-theme] .dcu-extension-items button:hover {
+  color: var(--dsw-alias-label-primary);
+  background: var(--dsw-alias-interactive-bg-hover);
+}
+
+/* Native capability rail: the Codex extension drawer becomes a plain section of
+   Expert / Skills / Connectors. The companion-installer rows and the drawer
+   toggle are removed, so the sidebar reads as one product surface. */
+body[data-ds-theme] .dcu-extensions-toggle {
+  display: none !important;
+}
+
+body[data-ds-theme] .dcu-extension-panel,
+body[data-ds-theme] .dcu-extension-panel-inner {
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+body[data-ds-theme] .dcu-extensions-group::before {
+  content: '能力';
+  display: block;
+  padding: 12px 6px 4px;
+  color: var(--dsw-alias-label-tertiary);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+
+body[data-ds-theme] .dcu-extension-items {
+  gap: 2px;
+  padding: 0 0 8px;
+}
+
+body[data-ds-theme] .dcu-extension-items button {
+  min-height: 32px;
+  border-radius: var(--dsw-radius-md);
+  color: var(--dsw-alias-label-secondary);
+  font-size: 13px;
+}
+
+body[data-ds-theme] .dcu-extension-items button:hover {
+  background: var(--dsw-alias-interactive-bg-hover);
+  color: var(--dsw-alias-label-primary);
+}
+
+body[data-ds-theme] .dcu-root {
+  background-image:
+    radial-gradient(280px 160px at 18% 0%, rgba(255, 90, 78, 0.055), transparent 72%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.012), transparent 24%);
+}
+
+body[data-ds-theme] .dcu-menu {
+  padding-bottom: 4px;
+}
+
+body[data-ds-theme] .dcu-menu button {
+  font-size: 13px;
+}
+
+body[data-ds-theme] .dcu-workspaces {
+  border-top: 1px solid var(--dsw-alias-border-l1);
+  margin-top: 4px;
+}
+
+html:lang(en) body[data-ds-theme] .dcu-extensions-group::before {
+  content: 'Capabilities';
+}

@@ -176,10 +176,22 @@ export function apply(ctx: ClientContext): void {
       },
     },
   })
+  const shellHandle = createSettingsShellStore()
+  const shellInstance = shellHandle.create()
+  const shellStore: typeof shellHandle = { ...shellHandle, create: () => shellInstance }
+  // Product surfaces can open Settings without importing this shell. The
+  // listener lives in apply rather than a component: a sidebar replacement may
+  // never mount SettingsRoot, while this store still owns the dialog state.
+  ctx.effect(() => {
+    const openFromProduct = (event: Event): void => {
+      const section = (event as CustomEvent<{ section?: unknown }>).detail?.section
+      if (typeof section === 'string' && section.length > 0) shellInstance.actions.openSection(section)
+      else shellInstance.actions.open()
+    }
+    window.addEventListener('demon:open-settings', openFromProduct)
+    return () => { window.removeEventListener('demon:open-settings', openFromProduct) }
+  }, 'ui-settings-general: product settings opener')
   ctx.slots.inject('sidebar.settings', () => {
-    const shellHandle = createSettingsShellStore()
-    const shellInstance = shellHandle.create()
-    const shellStore: typeof shellHandle = { ...shellHandle, create: () => shellInstance }
     const disposeCommand = ctx.shortcuts.register({
       id: 'settings.open' as ShortcutCommandId, label: () => t('shortcut.open'), aliases: ['settings', 'preferences'],
       defaults: {

@@ -140,17 +140,17 @@ DeepSeek 官方路由 + pi-ai 多供应商适配器。密钥按请求解析，�
 
 ### 方式一：Windows 安装包
 
-[从 GitHub Releases 下载安装包](https://github.com/z416946520/Demon-Code/releases/download/v0.2.1-rc.2.20261022.1/demon-code-0.2.1-rc.2.20261022.1-win-x64-unsigned.exe) · 274 MB
+[从 GitHub Releases 下载安装包](https://github.com/z416946520/Demon-Code/releases/download/v0.2.1-rc.2.20261022.4/demon-code-0.2.1-rc.2.20261022.4-win-x64-unsigned.exe) · 274 MB
 
-构建输出：`release/demon-code-0.2.1-rc.2.20261022.1-win-x64-unsigned.exe`
+构建输出：`release/demon-code-0.2.1-rc.2.20261022.4-win-x64-unsigned.exe`
 
 双击运行。安装包未签名，SmartScreen 提示“未知发布者”时选择“更多信息 → 仍要运行”。数据默认保存在 `%USERPROFILE%\.dsh`。
 
 ### 方式二：便携压缩包
 
-[从 GitHub Releases 下载便携包](https://github.com/z416946520/Demon-Code/releases/download/v0.2.1-rc.2.20261022.1/Demon-Code-0.2.1-rc.2.20261022.1-win-x64-portable.zip) · 360 MB
+[从 GitHub Releases 下载便携包](https://github.com/z416946520/Demon-Code/releases/download/v0.2.1-rc.2.20261022.4/Demon-Code-0.2.1-rc.2.20261022.4-win-x64-portable.zip) · 360 MB
 
-构建输出：`release/Demon-Code-0.2.1-rc.2.20261022.1-win-x64-portable.zip`
+构建输出：`release/Demon-Code-0.2.1-rc.2.20261022.4-win-x64-portable.zip`
 
 解压到任意目录，双击 `Demon Code.exe` 运行，不需要安装。数据位置相同。
 
@@ -166,7 +166,7 @@ pnpm start:web           # 浏览器版，默认 127.0.0.1:3080
 
 要求 Node.js `^22.19` 或 `>=24`，pnpm 11。
 
-校验文件：[SHA256SUMS.txt](https://github.com/z416946520/Demon-Code/releases/download/v0.2.1-rc.2.20261022.1/SHA256SUMS.txt)；安装/卸载说明：[INSTALL.txt](https://github.com/z416946520/Demon-Code/releases/download/v0.2.1-rc.2.20261022.1/INSTALL.txt)。
+校验文件：[SHA256SUMS.txt](https://github.com/z416946520/Demon-Code/releases/download/v0.2.1-rc.2.20261022.4/SHA256SUMS.txt)；安装/卸载说明：[INSTALL.txt](https://github.com/z416946520/Demon-Code/releases/download/v0.2.1-rc.2.20261022.4/INSTALL.txt)。
 
 ## 自动更新
 

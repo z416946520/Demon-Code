@@ -89,6 +89,8 @@ export function ModelSelect(
   const groupsRef = useRef<HTMLDivElement | null>(null)
   const [menuPos, setMenuPos] = useState<CSSProperties | null>(null)
   const itemRefs = useRef<(HTMLButtonElement | null)[]>([])
+  const [draftEffort, setDraftEffort] = useState<string | undefined>(undefined)
+  const cycleEffortRef = useRef<() => void>(() => {})
   const id = useId()
 
   const accountProviderName = t('provider.account')
@@ -125,6 +127,9 @@ export function ModelSelect(
     ? -1
     : choices.findIndex(c => c.selection.provider === state.current?.provider && c.selection.model === state.current.model)
   const currentChoice = choices[selectedIndex]
+  const isVision = currentChoice !== undefined
+    && /(?:vision|visual|multimodal|omni|(?:^|[-_.])vl(?:$|[-_.])|image)/i.test(
+      `${currentChoice.model.id} ${currentChoice.model.name} ${currentChoice.model.description ?? ''}`)
   const reasoning = currentChoice?.model.reasoning
   const effectiveEffort = state.current?.reasoningEffort ?? reasoning?.defaultEffort
   const effortLabel = currentChoice === undefined
@@ -148,6 +153,26 @@ export function ModelSelect(
     ], [reasoning, t])
   const { pending } = state
   const busy = pending !== null
+  const draftEffortIndex = Math.max(0, effortChoices.findIndex(level =>
+    level.effort === (draftEffort ?? effectiveEffort)))
+
+  useEffect(() => {
+    if (open) setDraftEffort(effectiveEffort)
+  }, [open, effectiveEffort])
+
+  // Ctrl+T cycles the same levels the slider exposes, matching the Codex
+  // picker's shortcut; it works while the picker is open on any focused row.
+  useEffect(() => {
+    if (!open) return
+    const onKey = (event: globalThis.KeyboardEvent): void => {
+      if (!event.ctrlKey || event.metaKey || event.altKey) return
+      if (event.key.toLowerCase() !== 't') return
+      event.preventDefault()
+      cycleEffortRef.current()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => { window.removeEventListener('keydown', onKey) }
+  }, [open])
 
   const reload = (): void => {
     lastActionRef.current = 'load'
@@ -419,6 +444,41 @@ export function ModelSelect(
     submit(selection)
   }
 
+  const applyEffort = (effort: string | undefined): void => {
+    if (state.current === null) return
+    lastActionRef.current = 'select'
+    const selection: ModelSelection = {
+      provider: state.current.provider,
+      model: state.current.model,
+      ...effort === undefined ? {} : { reasoningEffort: effort },
+    }
+    void select(selection).then((result) => {
+      if (result === undefined || result.ok) return
+      const { error } = result
+      toastSeq.current += 1
+      setToast({
+        seq: toastSeq.current,
+        text: error.code === 'session/writer-held'
+          ? t('error.sessionInUse')
+          : t('error.action', { message: `${error.code}: ${error.message}` }),
+      })
+    })
+  }
+
+  const commitEffortIndex = (index: number): void => {
+    const level = effortChoices[index]
+    if (level !== undefined) applyEffort(level.effort)
+  }
+
+  const cycleEffort = (): void => {
+    if (effortChoices.length === 0 || busy) return
+    const next = effortChoices[(draftEffortIndex + 1) % effortChoices.length]
+    if (next === undefined) return
+    setDraftEffort(next.effort)
+    applyEffort(next.effort)
+  }
+  cycleEffortRef.current = cycleEffort
+
   const waiting = currentChoice === undefined && state.status === 'loading'
   const modelLabel = waiting
     ? t('trigger.loading')
@@ -506,20 +566,68 @@ export function ModelSelect(
         >
           {pane === 'root' && (
             <>
+              <div className={css.pickerHead}>
+                <span className={css.pickerTitle}>
+                  {currentChoice?.group.provider.name ?? 'DSH Localhost API'}
+                </span>
+                <span className={css.pickerApi}>{t('menu.api')}</span>
+              </div>
               <button ref={itemRef()} type="button" role="menuitem" className={css.cell} onClick={() => { drill('model') }}>
                 <span className={css.cellLabel}>{t('menu.model')}</span>
                 <span className={css.cellValue}>
                   {currentChoice === undefined ? modelLabel : renderModelLabel(currentChoice.group.provider, currentChoice.model, 'menu', true)}
                 </span>
+                {isVision ? <span className={css.modelTag}>{t('menu.vision')}</span> : null}
                 <IconChevronRightOutlineRegular className={css.cellChevron} />
               </button>
-              {reasoning !== undefined && (
-                <button ref={itemRef()} type="button" role="menuitem" className={css.cell} onClick={() => { drill('effort') }}>
-                  <span className={css.cellLabel}>{t('menu.effort')}</span>
-                  <span className={css.cellValue}>{effortLabel}</span>
-                  <IconChevronRightOutlineRegular className={css.cellChevron} />
-                </button>
+              {effortChoices.length > 0 && (
+                <div className={css.effortBlock}>
+                  <div className={css.effortHead}>
+                    <span className={css.cellLabel}>{t('menu.effort')}</span>
+                    <span className={css.effortValue}>{effortChoices[draftEffortIndex]?.label ?? effortLabel}</span>
+                    <kbd className={css.kbd}>Ctrl+T</kbd>
+                  </div>
+                  <input
+                    className={css.effortSlider}
+                    type="range"
+                    min={0}
+                    max={Math.max(0, effortChoices.length - 1)}
+                    step={1}
+                    value={draftEffortIndex}
+                    disabled={busy}
+                    aria-label={t('menu.effort')}
+                    onChange={(event) => {
+                      const index = Number(event.target.value)
+                      setDraftEffort(effortChoices[index]?.effort)
+                    }}
+                    onPointerUp={(event) => { commitEffortIndex(Number(event.currentTarget.value)) }}
+                    onKeyUp={(event) => {
+                      if (event.key.startsWith('Arrow') || event.key === 'Home' || event.key === 'End') {
+                        commitEffortIndex(Number(event.currentTarget.value))
+                      }
+                    }}
+                  />
+                  <div className={css.effortScale} aria-hidden>
+                    <span>{effortChoices[0]?.label}</span>
+                    <span>{effortChoices[effortChoices.length - 1]?.label}</span>
+                  </div>
+                </div>
               )}
+              <button
+                type="button"
+                role="menuitem"
+                className={css.cell}
+                onClick={() => {
+                  close()
+                  const opener = (window as { __demonOpenSettings?: (section?: string) => Promise<boolean> }).__demonOpenSettings
+                  if (opener !== undefined) void opener('models')
+                  else window.dispatchEvent(new CustomEvent('demon:open-settings', { detail: { section: 'models' } }))
+                }}
+              >
+                <span className={css.cellLabel}>{t('menu.manage')}</span>
+                <span className={css.cellValue}>{t('menu.manageHint')}</span>
+                <IconChevronRightOutlineRegular className={css.cellChevron} />
+              </button>
             </>
           )}
 

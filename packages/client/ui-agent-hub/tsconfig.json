@@ -1,0 +1,17 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "lib/types"
+  },
+  "include": ["src/index.ts"],
+  "references": [
+    { "path": "../../../vendor/cordis" },
+    { "path": "../../../vendor/schemastery" },
+    { "path": "../../core/system-prompt" },
+    { "path": "../../core/agent" },
+    { "path": "../../skill/skill" },
+    { "path": "../../util/atomic-write" },
+    { "path": "../../util/home-paths" }
+  ]
+}

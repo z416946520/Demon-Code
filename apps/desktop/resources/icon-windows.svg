@@ -1,8 +1,10 @@
 <svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect width="1024" height="1024" rx="196" fill="#0A0A0C"/>
   <rect x="18" y="18" width="988" height="988" rx="180" stroke="#2B2B33" stroke-width="8"/>
-  <path d="M282 262 L716 512 L282 762" stroke="#FF5A4E" stroke-width="104" stroke-linecap="square" stroke-linejoin="miter"/>
-  <path d="M630 762 H806" stroke="#F1F1F2" stroke-width="104" stroke-linecap="square"/>
+  <g id="tray-glyph">
+    <path d="M282 262 L716 512 L282 762" stroke="#FF5A4E" stroke-width="104" stroke-linecap="square" stroke-linejoin="miter"/>
+    <path d="M630 762 H806" stroke="#F1F1F2" stroke-width="104" stroke-linecap="square"/>
+  </g>
   <path d="M242 214 L330 96" stroke="#FF5A4E" stroke-width="40" stroke-linecap="round" opacity="0.55"/>
   <path d="M782 214 L694 96" stroke="#FF5A4E" stroke-width="40" stroke-linecap="round" opacity="0.55"/>
 </svg>

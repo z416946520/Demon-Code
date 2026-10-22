@@ -2,8 +2,16 @@
 
 import z from '@deepseek-ai/schemastery'
 
-/** Built-in preferences accepted at the registry and settings boundaries. */
-export const THEME_PREFERENCES = ['light', 'dark', 'system'] as const
+/**
+ * Built-in preferences accepted at the registry and settings boundaries.
+ * `light`, `dark`, and `system` are palette modes; the remaining ids are
+ * Demon Code's registered theme skins. The union is also the durable settings
+ * schema, so adding a skin never needs a migration.
+ */
+export const THEME_PREFERENCES = [
+  'light', 'dark', 'system',
+  'obsidian', 'ember', 'aurora', 'graphite', 'sakura',
+] as const
 
 /** Settings namespace owned by the theme plugin. */
 export const THEME_SETTINGS_NAMESPACE = 'ui-theme'

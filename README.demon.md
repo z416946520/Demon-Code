@@ -140,17 +140,17 @@ DeepSeek 官方路由 + pi-ai 多供应商适配器。密钥按请求解析，�
 
 ### 方式一：Windows 安装包
 
-[从 GitHub Releases 下载安装包](https://github.com/z416946520/Demon-Code/releases/download/v0.2.1-rc.2.20261022.1/demon-code-0.2.1-rc.2.20261022.1-win-x64-unsigned.exe) · 274 MB
+[从 GitHub Releases 下载安装包](https://github.com/z416946520/Demon-Code/releases/download/v0.2.1-rc.2.20261022.4/demon-code-0.2.1-rc.2.20261022.4-win-x64-unsigned.exe) · 274 MB
 
-源码检出中的路径：`release/demon-code-0.2.1-rc.2.20261022.1-win-x64-unsigned.exe`
+构建输出：`release/demon-code-0.2.1-rc.2.20261022.4-win-x64-unsigned.exe`
 
 双击运行。安装包未签名，SmartScreen 提示“未知发布者”时选择“更多信息 → 仍要运行”。数据默认保存在 `%USERPROFILE%\.dsh`。
 
 ### 方式二：便携压缩包
 
-[从 GitHub Releases 下载便携包](https://github.com/z416946520/Demon-Code/releases/download/v0.2.1-rc.2.20261022.1/Demon-Code-0.2.1-rc.2.20261022.1-win-x64-portable.zip) · 360 MB
+[从 GitHub Releases 下载便携包](https://github.com/z416946520/Demon-Code/releases/download/v0.2.1-rc.2.20261022.4/Demon-Code-0.2.1-rc.2.20261022.4-win-x64-portable.zip) · 360 MB
 
-源码检出中的路径：`release/Demon-Code-0.2.1-rc.2.20261022.1-win-x64-portable.zip`
+构建输出：`release/Demon-Code-0.2.1-rc.2.20261022.4-win-x64-portable.zip`
 
 解压到任意目录，双击 `Demon Code.exe` 运行，不需要安装。数据位置相同。
 
@@ -166,7 +166,7 @@ pnpm start:web           # 浏览器版，默认 127.0.0.1:3080
 
 要求 Node.js `^22.19` 或 `>=24`，pnpm 11。
 
-校验文件：[release/SHA256SUMS.txt](release/SHA256SUMS.txt)；安装/卸载说明：[release/INSTALL.txt](release/INSTALL.txt)。
+校验文件：[SHA256SUMS.txt](https://github.com/z416946520/Demon-Code/releases/download/v0.2.1-rc.2.20261022.4/SHA256SUMS.txt)；安装/卸载说明：[INSTALL.txt](https://github.com/z416946520/Demon-Code/releases/download/v0.2.1-rc.2.20261022.4/INSTALL.txt)。
 
 ## 自动更新
 
@@ -177,6 +177,11 @@ Demon Code 直接读取 GitHub Releases 判断版本，不依赖第三方更新�
 - **安装版**：下载对应 Windows 安装包 → 用 `SHA256SUMS.txt` 校验 SHA-256 → 退出应用 → 静默运行安装包 → 自动重启。
 - **便携版**：下载便携 zip → 校验 → 退出应用 → 替换当前应用目录，保留带时间戳的 `.old-*` 备份后重启。
 - **发布新版本**：创建 `vX.Y.Z` Release，上传安装包、便携包和 `SHA256SUMS.txt`。用户端的下一次检查会自动发现并更新。
+- **内部构建版本**：产品版本保持 `0.2.1-rc.2`，每次构建使用 `0.2.1-rc.2.<YYYYMMDD>.<序号>`；Build ID 为 `版本+commit.构建时间`。构建命令：
+
+  ```sh
+  pnpm --filter @deepseek-ai/dsh-desktop run package:win:x64:unsigned --     --build-version 0.2.1-rc.2.$(date +%Y%m%d).1
+  ```
 
 安装包未签名，更新器只验证发布资产中的 SHA-256，不验证代码签名。只从 `https://github.com/z416946520/Demon-Code` 的 Release 读取更新。
 

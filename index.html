@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Demon Code — 把想法直接跑起来的桌面智能体</title>
-  <meta name="description" content="Demon Code 是一个 Codex 风味的 Windows 桌面 AI 开发工作台：三种 Agent 预设、内置 Moli 无头浏览器、国产模型路由、插件生态与可审计长期记忆。" />
+  <meta name="description" content="Demon Code 是一个 Codex 风味的 Windows 桌面 AI 开发工作台：294+ 内置专家、Skills 与 MCP 管理、五种主题皮肤、模型思考强度滑杆、内置 Moli 浏览器、国产模型路由与可审计长期记忆。" />
   <meta name="theme-color" content="#08080a" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="stylesheet" href="styles.css" />
@@ -29,6 +29,8 @@
       </a>
       <nav class="nav-links" aria-label="主导航">
         <a href="#modes">预设</a>
+        <a href="#hub">专家库</a>
+        <a href="#themes">主题</a>
         <a href="#browser">浏览器</a>
         <a href="#models">模型</a>
         <a href="#plugins">插件</a>
@@ -86,6 +88,8 @@
 
       <div class="container stats reveal">
         <div><strong>3</strong><span>Agent 预设</span></div>
+        <div><strong>294+</strong><span>内置专家</span></div>
+        <div><strong>5</strong><span>主题皮肤</span></div>
         <div><strong>15</strong><span>模型路由</span></div>
         <div><strong>207</strong><span>REA 逆向工具</span></div>
         <div><strong>1</strong><span>内置 Moli 浏览器</span></div>
@@ -136,6 +140,151 @@
               <li>预设编辑</li>
             </ul>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="hub">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">AGENT HUB / EXPERTS · SKILLS · MCP</p>
+          <h2>专家、技能、连接器，<br />不用再拼插件。</h2>
+          <p>
+            内置 294 位专家，覆盖技术、设计、产品、游戏、数据、营销、安全等 20 个分类。
+            选中即注入 persona；Skills 可从本地或 Git 安装；MCP 服务器在应用内直接挂载。
+          </p>
+        </header>
+
+        <div class="hub-board reveal" aria-label="Agent Hub 界面示意">
+          <div class="hub-tabs">
+            <span class="hub-tab hub-tab-on">专家 <b>294</b></span>
+            <span class="hub-tab">Skills <b>12</b></span>
+            <span class="hub-tab">MCP <b>4</b></span>
+            <span class="hub-search">搜索专家、职业或标签…</span>
+          </div>
+          <div class="hub-grid">
+            <article class="hub-card">
+              <div class="hub-emoji">🔥</div>
+              <div><b>首席工程师</b><span>架构取舍 · 关键实现 · 验收</span></div>
+              <p>把模糊需求收敛成可执行方案，先定位再动手，改完就跑构建。</p>
+              <div class="hub-tags"><span>系统设计</span><span>交付验收</span></div>
+            </article>
+            <article class="hub-card">
+              <div class="hub-emoji">🧬</div>
+              <div><b>逆向工程师</b><span>二进制 · 协议 · 补丁定位</span></div>
+              <p>只处理自有或授权目标；结论落到地址、偏移、字节与可复现命令。</p>
+              <div class="hub-tags"><span>证据链</span><span>授权范围</span></div>
+            </article>
+            <article class="hub-card">
+              <div class="hub-emoji">◈</div>
+              <div><b>前端工程师</b><span>交互 · 可访问性 · 动效成本</span></div>
+              <p>布局先定层级，再谈颜色；覆盖八态、键盘路径与窄屏溢出。</p>
+              <div class="hub-tags"><span>React</span><span>性能</span></div>
+            </article>
+            <article class="hub-card">
+              <div class="hub-emoji">▦</div>
+              <div><b>数据分析师</b><span>指标 · 清洗 · 决策报告</span></div>
+              <p>先问决策对象与口径，再看趋势；相关性不冒充因果。</p>
+              <div class="hub-tags"><span>KPI</span><span>归因</span></div>
+            </article>
+            <article class="hub-card">
+              <div class="hub-emoji">⌘</div>
+              <div><b>办公自动化</b><span>Word · Excel · PPT · PDF</span></div>
+              <p>保留样式、公式与批注；批量前先跑小样本，输出到新文件。</p>
+              <div class="hub-tags"><span>批处理</span><span>格式修复</span></div>
+            </article>
+            <article class="hub-card">
+              <div class="hub-emoji">◌</div>
+              <div><b>深度研究员</b><span>多源检索 · 交叉验证</span></div>
+              <p>关键结论带出处与日期；主动找反例，不编造链接和数据。</p>
+              <div class="hub-tags"><span>出处</span><span>置信度</span></div>
+            </article>
+          </div>
+          <div class="hub-foot">
+            <code>select expert → persona → next turn</code>
+            <span>选中专家后，下一轮直接带上它的方法、边界与输出规范</span>
+          </div>
+        </div>
+
+        <div class="feature-triplet">
+          <article class="feature-cell reveal">
+            <span class="mini-index">01</span>
+            <h3>专家库</h3>
+            <p>294 位内置专家 + WorkBuddy 本地专家包导入。分类、搜索、标签、快捷提示词都在一个面板里。</p>
+          </article>
+          <article class="feature-cell reveal">
+            <span class="mini-index">02</span>
+            <h3>Skills</h3>
+            <p>本地目录或 Git 仓库安装；全局 / 当前项目启用；“仅手动”技能不进入模型自动发现。</p>
+          </article>
+          <article class="feature-cell reveal">
+            <span class="mini-index">03</span>
+            <h3>MCP</h3>
+            <p>stdio 或 streamable-http，保存即由 Loader 挂载；工具以 <code>mcp__server__tool</code> 出现在模型工具列表。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="themes">
+      <div class="container split">
+        <div class="split-copy reveal">
+          <p class="eyebrow">THEMES / AMBIENT MOTION</p>
+          <h2>五种皮肤，<br />不再是一片纯黑。</h2>
+          <p>
+            黑曜、余烬、极光、石墨、夜樱。每个皮肤有自己的底色、边框、文本层级与低亮度环境光。
+            动态背景只用一层固定渐变和 <code>transform</code> 动画，没有 Canvas、没有动画库常驻。
+          </p>
+          <ul class="check-list">
+            <li>尊重 <code>prefers-reduced-motion</code></li>
+            <li>只合成一层，不逐帧跑 JavaScript</li>
+            <li>暗色主题下仍保证正文对比度</li>
+          </ul>
+        </div>
+        <div class="theme-board reveal" aria-label="主题皮肤示意">
+          <div class="theme-swatch" style="--s1:#0b0b0e;--s2:#ff5a4e"><span></span><b>黑曜</b><em>Obsidian</em></div>
+          <div class="theme-swatch" style="--s1:#120d0c;--s2:#ff7a45"><span></span><b>余烬</b><em>Ember</em></div>
+          <div class="theme-swatch" style="--s1:#080d12;--s2:#55d6c2"><span></span><b>极光</b><em>Aurora</em></div>
+          <div class="theme-swatch" style="--s1:#0d0e11;--s2:#9aa7b8"><span></span><b>石墨</b><em>Graphite</em></div>
+          <div class="theme-swatch" style="--s1:#120c11;--s2:#ff7eb6"><span></span><b>夜樱</b><em>Sakura</em></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="workbench">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">WORKBENCH / MODEL PICKER</p>
+          <h2>状态一眼看清，<br />思考强度一滑就调。</h2>
+          <p>输入框上方常驻 Git 更改、分支、进程、Todo 与终端状态；模型选择器直接给模型列表、视觉标签和绿色→蓝色思考强度滑杆。</p>
+        </header>
+        <div class="workbench-grid">
+          <div class="mock-panel model-panel reveal">
+            <div class="mock-head"><span>DSH Localhost API</span><span class="mono-label">API</span></div>
+            <div class="mock-row"><span>Model</span><b>cn:deepseek-v4-flash</b><span class="mock-tag">视觉</span><span class="mock-chevron">›</span></div>
+            <div class="mock-slider">
+              <div class="mock-slider-head"><span>思考强度</span><b>最高</b><kbd>Ctrl+T</kbd></div>
+              <div class="mock-track"><i></i></div>
+              <div class="mock-scale"><span>低</span><span>高</span></div>
+            </div>
+            <div class="mock-row mock-row-sub"><span>管理模型</span><span>模型与 API Key</span><span class="mock-chevron">›</span></div>
+          </div>
+          <div class="mock-panel status-panel reveal">
+            <div class="mock-status">
+              <span>⑂ Git 工具</span><span class="mock-branch">master</span>
+              <span class="green">+6593</span><span class="red">−509</span>
+              <span class="mock-action">提交或推送</span>
+            </div>
+            <div class="mock-status">
+              <span>◉ 进程</span><b>8/8</b>
+              <span>✓ 已完成</span><b>5/8</b>
+              <span>›_ 终端</span><b>49:58</b><span class="muted">2 后台</span>
+            </div>
+            <pre class="mock-terminal"><span class="t-dim">$</span> pnpm test
+<span class="t-ok">✓ 12 passed</span> · 0 failed
+<span class="t-dim">$</span> git status
+<span class="t-dim">modified: src/auth/session.ts</span></pre>
+          </div>
         </div>
       </div>
     </section>
@@ -322,7 +471,7 @@
         <div class="update-card reveal" aria-label="自动更新流程">
           <div class="update-head"><span>DEMON CODE / UPDATE</span><span class="update-live">LIVE</span></div>
           <div class="update-body">
-            <div class="update-row"><span class="c-dim">current</span><code>0.2.1-rc.2</code><span class="c-dim">build 20261022.1</span></div>
+            <div class="update-row"><span class="c-dim">current</span><code>0.2.1-rc.2</code><span class="c-dim">build 20261022.4</span></div>
             <div class="update-row"><span class="c-dim">github</span><code class="c-green">0.2.1-rc.3</code><span class="c-dim">release</span></div>
             <div class="update-bar"><i></i></div>
             <div class="update-row"><span class="c-dim">verify</span><code>sha256 ok</code><span class="c-green">✓</span></div>
@@ -346,20 +495,20 @@
             <h3>Windows 安装包</h3>
             <p>274 MB · 双击运行。未签名，SmartScreen 提示时选“更多信息 → 仍要运行”。</p>
             <div class="copy-row">
-              <code>demon-code-0.2.1-rc.2.20261022.1-win-x64-unsigned.exe</code>
-              <button class="copy-btn" data-copy="demon-code-0.2.1-rc.2.20261022.1-win-x64-unsigned.exe" aria-label="复制文件名">复制</button>
+              <code>demon-code-0.2.1-rc.2.20261022.4-win-x64-unsigned.exe</code>
+              <button class="copy-btn" data-copy="demon-code-0.2.1-rc.2.20261022.4-win-x64-unsigned.exe" aria-label="复制文件名">复制</button>
             </div>
-            <a class="btn btn-primary btn-block" href="https://github.com/z416946520/Demon-Code/releases/download/v0.2.1-rc.2.20261022.1/demon-code-0.2.1-rc.2.20261022.1-win-x64-unsigned.exe" target="_blank" rel="noreferrer">下载安装包</a>
+            <a class="btn btn-primary btn-block" href="https://github.com/z416946520/Demon-Code/releases/download/v0.2.1-rc.2.20261022.4/demon-code-0.2.1-rc.2.20261022.4-win-x64-unsigned.exe" target="_blank" rel="noreferrer">下载安装包</a>
           </article>
           <article class="install-card reveal">
             <div class="install-top"><span class="tag tag-outline">PORTABLE</span><span class="mono-label">ZIP</span></div>
             <h3>便携压缩包</h3>
             <p>360 MB · 解压到任意目录，运行 <code>Demon Code.exe</code>。不写安装记录。</p>
             <div class="copy-row">
-              <code>Demon-Code-0.2.1-rc.2.20261022.1-win-x64-portable.zip</code>
-              <button class="copy-btn" data-copy="Demon-Code-0.2.1-rc.2.20261022.1-win-x64-portable.zip" aria-label="复制文件名">复制</button>
+              <code>Demon-Code-0.2.1-rc.2.20261022.4-win-x64-portable.zip</code>
+              <button class="copy-btn" data-copy="Demon-Code-0.2.1-rc.2.20261022.4-win-x64-portable.zip" aria-label="复制文件名">复制</button>
             </div>
-            <a class="btn btn-ghost btn-block" href="https://github.com/z416946520/Demon-Code/releases/download/v0.2.1-rc.2.20261022.1/Demon-Code-0.2.1-rc.2.20261022.1-win-x64-portable.zip" target="_blank" rel="noreferrer">下载便携包</a>
+            <a class="btn btn-ghost btn-block" href="https://github.com/z416946520/Demon-Code/releases/download/v0.2.1-rc.2.20261022.4/Demon-Code-0.2.1-rc.2.20261022.4-win-x64-portable.zip" target="_blank" rel="noreferrer">下载便携包</a>
           </article>
           <article class="install-card reveal">
             <div class="install-top"><span class="tag tag-outline">SOURCE</span><span class="mono-label">DEV</span></div>

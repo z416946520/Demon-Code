@@ -23,6 +23,8 @@ import type { AppearanceRowInjected } from './AppearanceRow.tsx'
 import { AppearanceRow } from './AppearanceRow.tsx'
 import type { FontSettingsInjected } from './FontSettingsGroup.tsx'
 import { FontSettingsGroup } from './FontSettingsGroup.tsx'
+import { ThemeGalleryRow } from './ThemeGalleryRow.tsx'
+import { DEMON_THEMES } from './demon-themes.ts'
 import { createAppearanceRowStore, createFontRowStore } from './settings-store.ts'
 import { installThemeStyles } from './styles.ts'
 import { en, zh, type ThemeKey } from './locales.ts'
@@ -548,13 +550,19 @@ export function apply(ctx: ClientContext): void {
   const host = ctx.configForms.get<ThemeSettings>(THEME_SETTINGS_NAMESPACE)
   const theme = new ThemeRuntime(ctx, host)
   ctx.provide('theme', theme)
+  for (const definition of DEMON_THEMES) {
+    ctx.effect(() => theme.register(definition), `ui-theme: ${definition.id}`)
+  }
 
   const store = createAppearanceRowStore()
   let bound: BoundActions<typeof store> | undefined
+  const galleryStore = createAppearanceRowStore()
+  let galleryBound: BoundActions<typeof galleryStore> | undefined
   const fontStore = createFontRowStore()
   let fontBound: BoundActions<typeof fontStore> | undefined
   const sync = (snapshot: ThemeSnapshot): void => {
     bound?.sync(snapshot.preference, snapshot.revision)
+    galleryBound?.sync(snapshot.preference, snapshot.revision)
     fontBound?.sync(snapshot.fontSizes, snapshot.fontFamilies, snapshot.revision)
   }
   ctx.on('theme/change', sync)
@@ -575,6 +583,21 @@ export function apply(ctx: ClientContext): void {
     locale: SETTINGS_NS,
     inject: injected,
   }, AppearanceRow))
+
+  ctx.slots.inject('settings.general.item', () => ctx.slots.register({
+    name: 'settings.general.item',
+    id: 'theme-gallery',
+    order: 12,
+    store: galleryStore,
+    locale: SETTINGS_NS,
+    inject: (actions: BoundActions<typeof galleryStore>): AppearanceRowInjected => {
+      galleryBound = actions
+      sync(theme.getTheme())
+      return {
+        setTheme: (id) => { theme.setTheme(id) },
+      }
+    },
+  }, ThemeGalleryRow))
 
   ctx.slots.inject('settings.general.item', () => ctx.slots.register({
     name: 'settings.general.item',

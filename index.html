@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Demon Code — 把想法直接跑起来的桌面智能体</title>
+  <meta name="description" content="Demon Code 是一个 Codex 风味的 Windows 桌面 AI 开发工作台：三种 Agent 预设、内置 Moli 无头浏览器、国产模型路由、插件生态与可审计长期记忆。" />
+  <meta name="theme-color" content="#08080a" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="styles.css" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Demon Code — 把想法直接跑起来" />
+  <meta property="og:description" content="Codex 风味的桌面 Agent：通用 / 逆向 / 创造三预设，内置 Moli 浏览器，国产模型优先。" />
+  <meta property="og:url" content="https://z416946520.github.io/Demon-Code/" />
+  <meta property="og:image" content="https://z416946520.github.io/Demon-Code/assets/desktop.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Demon Code — 把想法直接跑起来" />
+  <meta name="twitter:description" content="Codex 风味的桌面 Agent：通用 / 逆向 / 创造三预设，内置 Moli 浏览器，国产模型优先。" />
+  <meta name="twitter:image" content="https://z416946520.github.io/Demon-Code/assets/desktop.png" />
+</head>
+<body>
+  <a class="skip" href="#main">跳到主要内容</a>
+
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#top" aria-label="Demon Code 首页">
+        <img src="assets/icon.svg" width="28" height="28" alt="" />
+        <span>DEMON CODE</span>
+      </a>
+      <nav class="nav-links" aria-label="主导航">
+        <a href="#modes">预设</a>
+        <a href="#browser">浏览器</a>
+        <a href="#models">模型</a>
+        <a href="#plugins">插件</a>
+        <a href="#install">安装</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn btn-ghost btn-sm" href="https://github.com/z416946520/Demon-Code" target="_blank" rel="noreferrer">GitHub</a>
+        <a class="btn btn-primary btn-sm" href="#install">开始使用</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="打开菜单" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">DESKTOP AGENT · WINDOWS X64 · MIT</p>
+          <h1>把想法<br /><span class="accent">直接跑起来。</span></h1>
+          <p class="lede">
+            一个 Codex 风味的桌面工作台。编程、办公、研究、逆向共用同一套工具、会话与长期记忆。
+            内置 Moli 无头浏览器，默认接国产模型。
+          </p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#install">获取 Demon Code</a>
+            <a class="btn btn-ghost" href="https://github.com/z416946520/Demon-Code" target="_blank" rel="noreferrer">查看源码</a>
+          </div>
+          <p class="hero-note">Windows 10/11 · 安装包 / 便携 zip · 无需管理员权限</p>
+        </div>
+
+        <div class="terminal reveal" aria-label="Demon Code 终端演示">
+          <div class="terminal-bar">
+            <span class="dots"><i></i><i></i><i></i></span>
+            <span class="terminal-title">demon-code — workspace</span>
+            <span class="terminal-badge">v0.2.1</span>
+          </div>
+          <pre class="terminal-body" id="terminal"><span class="t-line t-dim"># one agent, three modes</span>
+<span class="t-line"><span class="t-prompt">$</span> dc <span class="t-str">"修复登录测试"</span></span>
+<span class="t-line t-dim">  read   src/auth/session.ts</span>
+<span class="t-line t-dim">  plan   3 files · 1 test</span>
+<span class="t-line t-dim">  edit   src/auth/session.ts</span>
+<span class="t-line t-dim">  run    pnpm test auth</span>
+<span class="t-line t-ok">  ✓ 12 passed · 0 failed</span>
+<span class="t-line t-dim"># need a real browser?</span>
+<span class="t-line"><span class="t-prompt">$</span> dc <span class="t-str">"抓取这个 JS 渲染的页面"</span></span>
+<span class="t-line t-dim">  moli_fetch selector=".video-card"</span>
+<span class="t-line t-ok">  ✓ 47 matches · 1,779 chars</span>
+<span class="t-line"><span class="cursor" aria-hidden="true"></span></span></pre>
+        </div>
+      </div>
+
+      <div class="container stats reveal">
+        <div><strong>3</strong><span>Agent 预设</span></div>
+        <div><strong>15</strong><span>模型路由</span></div>
+        <div><strong>207</strong><span>REA 逆向工具</span></div>
+        <div><strong>1</strong><span>内置 Moli 浏览器</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="modes">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">01 / MODES</p>
+          <h2>一个 Agent，三种预设。</h2>
+          <p>不再在十个模式里做选择。日常一个“通用”，需要时切“逆向”，做插件用“创造”。</p>
+        </header>
+        <div class="mode-grid">
+          <article class="mode-card mode-primary reveal">
+            <div class="mode-top"><span class="mode-index">00</span><span class="tag">DEFAULT</span></div>
+            <h3>通用</h3>
+            <p class="mode-sub">Daily driver</p>
+            <p>编程、办公、研究、助手合并。办公技能默认挂载，编程仍走最严格的读 → 改 → 验证闭环。</p>
+            <ul>
+              <li>读写改文件、搜索、终端</li>
+              <li>docx / xlsx / pptx / pdf</li>
+              <li>网页检索与 Moli 浏览器</li>
+              <li>项目指令 + 长期记忆</li>
+            </ul>
+          </article>
+          <article class="mode-card reveal">
+            <div class="mode-top"><span class="mode-index">01</span><span class="tag tag-outline">SPECIALIST</span></div>
+            <h3>逆向</h3>
+            <p class="mode-sub">Authorized reversing</p>
+            <p>面向你拥有或明确授权的目标：REA MCP、dsh-purge 指令权威控制、证据链报告。</p>
+            <ul>
+              <li>PE / ELF / Mach-O / .NET</li>
+              <li>APK / Electron / JS bundle</li>
+              <li>协议与 patch 定位</li>
+              <li>207 个 REA 工具</li>
+            </ul>
+          </article>
+          <article class="mode-card reveal">
+            <div class="mode-top"><span class="mode-index">02</span><span class="tag tag-outline">META</span></div>
+            <h3>创造</h3>
+            <p class="mode-sub">Build your own</p>
+            <p>用对话写 Cordis 插件、组合工具与提示词，做出属于你的 Agent 预设。</p>
+            <ul>
+              <li>插件开发技能</li>
+              <li>运行时检视</li>
+              <li>工具 / 提示词组合</li>
+              <li>预设编辑</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="browser">
+      <div class="container split">
+        <div class="split-copy reveal">
+          <p class="eyebrow">02 / BROWSER</p>
+          <h2>需要浏览器时，<br />它已经在那里。</h2>
+          <p>
+            Demon Code 内置 <strong>Moli</strong>（约 2 万星的 Rust 无头浏览器）的桥接插件。
+            页面由 JavaScript 渲染、需要登录态、只想读一个列表、要截图或 PDF 时，直接调用。
+          </p>
+          <div class="tool-row">
+            <div class="tool"><code>moli_fetch</code><span>渲染 · Markdown · selector · 截图 · PDF</span></div>
+            <div class="tool"><code>moli_probe</code><span>检查引擎 · 版本 · 按需安装</span></div>
+          </div>
+          <p class="muted">
+            静态文章和 API 仍优先 <code>web_fetch</code>，更轻。Moli 引擎单独安装或自动发现，
+            不把 100 MB 浏览器塞进每个安装包。
+          </p>
+          <a class="text-link" href="https://github.com/lexmount/moli" target="_blank" rel="noreferrer">了解 Moli →</a>
+        </div>
+        <div class="browser-mock reveal" aria-label="Moli 浏览器输出示例">
+          <div class="browser-bar">
+            <span class="dots"><i></i><i></i><i></i></span>
+            <span class="address">moli://render</span>
+            <span class="browser-action">DOM</span>
+          </div>
+          <div class="browser-body">
+            <div class="code-line"><span class="c-dim">$</span> moli_fetch <span class="c-key">url</span>=<span class="c-str">"https://example.com/feed"</span></div>
+            <div class="code-line"><span class="c-dim">  selector</span>=<span class="c-str">".video-card"</span></div>
+            <div class="code-line"><span class="c-dim">  scroll</span>=<span class="c-num">2000</span></div>
+            <div class="code-gap"></div>
+            <div class="result-row"><span class="t-ok">✓</span> <span>47 matches</span><span class="c-dim">·</span><span>1,779 chars</span><span class="c-dim">·</span><span class="c-green">78× smaller</span></div>
+            <div class="result-card">
+              <div class="skeleton w70"></div>
+              <div class="skeleton w90"></div>
+              <div class="skeleton w55"></div>
+            </div>
+            <div class="result-card">
+              <div class="skeleton w60"></div>
+              <div class="skeleton w85"></div>
+              <div class="skeleton w45"></div>
+            </div>
+            <div class="result-footer"><span>markdown</span><span>selector</span><span>screenshot</span><span>pdf</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="models">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">03 / MODELS</p>
+          <h2>你的 Key，你的模型。</h2>
+          <p>DeepSeek 官方 + pi-ai 多供应商。路由实时增删，密钥按请求解析，不写进配置文件。</p>
+        </header>
+        <div class="model-layout">
+          <div class="provider-cloud reveal" aria-label="预置模型供应商">
+            <span class="chip chip-ember">DeepSeek</span>
+            <span class="chip">Kimi</span>
+            <span class="chip">Qwen</span>
+            <span class="chip">GLM</span>
+            <span class="chip">MiniMax</span>
+            <span class="chip">Doubao</span>
+            <span class="chip">Hunyuan</span>
+            <span class="chip">SiliconFlow</span>
+            <span class="chip">OpenRouter</span>
+            <span class="chip">Ollama</span>
+            <span class="chip chip-muted">+ 5 more</span>
+          </div>
+          <figure class="shot reveal">
+            <img src="assets/models.png" alt="Demon Code 模型设置页" />
+            <figcaption>设置 → 模型：15 条预置路由，端点发现与凭据管理。</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="plugins">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">04 / PLUGINS</p>
+          <h2>一个内核，三条扩展路径。</h2>
+          <p>不是把所有能力硬编码进 Agent。能力通过插件挂载，失败可隔离，更新不重写循环。</p>
+        </header>
+        <div class="plugin-grid">
+          <article class="plugin-card reveal">
+            <p class="mono-label">NATIVE</p>
+            <h3>Cordis / dsh 插件</h3>
+            <p>npm / GitHub 安装，设置页启停。工具、提示词、会话、计划模式都是插件。</p>
+            <code>dsh plugin add &lt;package&gt;</code>
+          </article>
+          <article class="plugin-card reveal">
+            <p class="mono-label">BRIDGE</p>
+            <h3>pi 资源</h3>
+            <p>导入 pi 的 skills / prompts / themes。可执行扩展不伪造运行时，边界如实告知。</p>
+            <code>pnpm demon:pi-bridge</code>
+          </article>
+          <article class="plugin-card reveal">
+            <p class="mono-label">PROTOCOL</p>
+            <h3>MCP</h3>
+            <p>标准 MCP 客户端。REA 逆向模式就是一个 MCP 服务器；第三方工具按同一协议接入。</p>
+            <code>mcp__&lt;server&gt;__&lt;tool&gt;</code>
+          </article>
+        </div>
+        <div class="kernel-strip reveal">
+          <span>Electron shell</span><i>→</i><span>dsh host</span><i>→</i><span>Cordis plugin tree</span><i>→</i><span>Agent preset</span><i>→</i><span>tools · skills · memory</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="memory">
+      <div class="container split split-reverse">
+        <div class="split-copy reveal">
+          <p class="eyebrow">05 / MEMORY</p>
+          <h2>会积累，<br />但不是黑盒。</h2>
+          <p>
+            两层 Markdown 记忆：用户级跨项目偏好，项目级构建命令、架构约束与踩坑。
+            每条一行，带日期、分类、来源。能 grep、能提交 Git、能回滚。
+          </p>
+          <ul class="check-list">
+            <li>不训练权重，不假装“越用越聪明”</li>
+            <li>项目记忆跟着仓库走</li>
+            <li>密钥禁止写入</li>
+            <li>会话日志与 SQLite 检索可回查</li>
+          </ul>
+        </div>
+        <div class="memory-card reveal">
+          <div class="memory-head"><span>~/.dsh/MEMORY.md</span><span class="memory-dot"></span></div>
+          <pre class="memory-body"><span class="c-dim"># cross-project, durable facts only</span>
+<span class="c-dim"># YYYY-MM-DD | category | fact | source</span>
+
+2026-10-22 | build | pnpm build runs 9 gates | repo
+2026-10-22 | arch  | presets are bundle patches | docs
+2026-10-22 | pref  | answer in Chinese, code in English | user
+2026-10-22 | gotcha| Moli needs engine on PATH | moli_probe</pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="gallery">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">06 / SCREENS</p>
+          <h2>Codex 风味，不是模板。</h2>
+          <p>近黑底、等宽微标签、方形控件，一个朱红强调色。信息密度高，但不吵。</p>
+        </header>
+        <div class="gallery">
+          <figure class="shot shot-wide reveal">
+            <img src="assets/desktop.png" alt="Demon Code 主工作区" />
+            <figcaption>工作区：文件、会话、输入与模型选择。</figcaption>
+          </figure>
+          <figure class="shot reveal">
+            <img src="assets/presets.png" alt="Demon Code 预设设置" />
+            <figcaption>三个预设：通用 / 逆向 / 创造。</figcaption>
+          </figure>
+          <figure class="shot reveal">
+            <img src="assets/reverse.png" alt="Demon Code 逆向模式命令菜单" />
+            <figcaption>逆向模式：purge 与证据链技能。</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="install">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">07 / INSTALL</p>
+          <h2>三十秒开始。</h2>
+          <p>Windows 10/11，安装包或便携包，不需要管理员权限。数据默认在 <code>%USERPROFILE%\.dsh</code>。</p>
+        </header>
+        <div class="install-grid">
+          <article class="install-card reveal">
+            <div class="install-top"><span class="tag">RECOMMENDED</span><span class="mono-label">INSTALLER</span></div>
+            <h3>Windows 安装包</h3>
+            <p>双击运行。未签名，SmartScreen 提示时选“更多信息 → 仍要运行”。</p>
+            <div class="copy-row">
+              <code>demon-code-0.2.1-rc.2-win-x64-unsigned.exe</code>
+              <button class="copy-btn" data-copy="demon-code-0.2.1-rc.2-win-x64-unsigned.exe" aria-label="复制文件名">复制</button>
+            </div>
+            <a class="btn btn-primary btn-block" href="https://github.com/z416946520/Demon-Code" target="_blank" rel="noreferrer">前往 GitHub 获取</a>
+          </article>
+          <article class="install-card reveal">
+            <div class="install-top"><span class="tag tag-outline">PORTABLE</span><span class="mono-label">ZIP</span></div>
+            <h3>便携压缩包</h3>
+            <p>解压到任意目录，运行 <code>Demon Code.exe</code>。不写安装记录。</p>
+            <div class="copy-row">
+              <code>Demon-Code-0.2.1-rc.2-win-x64-portable.zip</code>
+              <button class="copy-btn" data-copy="Demon-Code-0.2.1-rc.2-win-x64-portable.zip" aria-label="复制文件名">复制</button>
+            </div>
+            <a class="btn btn-ghost btn-block" href="https://github.com/z416946520/Demon-Code" target="_blank" rel="noreferrer">前往 GitHub 获取</a>
+          </article>
+          <article class="install-card reveal">
+            <div class="install-top"><span class="tag tag-outline">SOURCE</span><span class="mono-label">DEV</span></div>
+            <h3>从源码运行</h3>
+            <p>Node.js 22.19+ 或 24+，pnpm 11。构建后启动桌面端或 Web。</p>
+            <div class="code-block">
+              <button class="copy-btn" data-copy="pnpm install && pnpm run build && pnpm run dev:desktop" aria-label="复制命令">复制</button>
+              <pre><span class="c-dim">$</span> pnpm install
+<span class="c-dim">$</span> pnpm run build
+<span class="c-dim">$</span> pnpm run dev:desktop</pre>
+            </div>
+          </article>
+        </div>
+        <p class="install-note reveal">安装包 SHA-256 与安装说明见仓库 <code>release/SHA256SUMS.txt</code> 与 <code>release/INSTALL.txt</code>。</p>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="faq">
+      <div class="container faq-wrap">
+        <header class="section-head reveal">
+          <p class="eyebrow">08 / FAQ</p>
+          <h2>常见问题</h2>
+        </header>
+        <details class="reveal">
+          <summary>Demon Code 和 Cursor / Claude Code 有什么不同？</summary>
+          <p>它不是一个 IDE，也不是纯 CLI。它是桌面端的一体化 Agent：通用模式把编程、办公、研究、助手放在一起；逆向模式接 REA；插件同时吃 Cordis、pi 资源和 MCP。模型可换，数据本地，源码完整。</p>
+        </details>
+        <details class="reveal">
+          <summary>必须用 DeepSeek 吗？</summary>
+          <p>不。预置 15 条路由，DeepSeek 只是默认。Kimi、Qwen、GLM、MiniMax、豆包、混元、SiliconFlow、OpenRouter、本地 Ollama 都能接。</p>
+        </details>
+        <details class="reveal">
+          <summary>Moli 浏览器需要单独安装吗？</summary>
+          <p>安装包包含桥接插件，不包含约 100 MB 的 Moli 引擎。插件会在 PATH 或 <code>%LOCALAPPDATA%\Moli</code> 自动发现；缺失时运行 <code>moli_probe action=install</code>，或使用 Moli 官方安装脚本。</p>
+        </details>
+        <details class="reveal">
+          <summary>逆向模式会自动修改系统吗？</summary>
+          <p>不会。dsh-purge 以 <code>autoApplyOnStart: false</code> 挂载。只有你明确执行 <code>/purge apply</code> 或调用 <code>purge_apply</code> 并确认后，才会改写运行时并调整权限默认值。</p>
+        </details>
+        <details class="reveal">
+          <summary>长期记忆会发送到云端吗？</summary>
+          <p>记忆是本地 Markdown 文件。模型请求会按你选择的供应商发送必要上下文；密钥在受管凭据存储中，不写入记忆、项目或日志。</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="brand" href="#top"><img src="assets/icon.svg" width="26" height="26" alt="" /><span>DEMON CODE</span></a>
+        <p class="footer-note">把想法直接跑起来的桌面智能体。</p>
+      </div>
+      <div class="footer-links">
+        <div><strong>产品</strong><a href="#modes">预设</a><a href="#browser">Moli 浏览器</a><a href="#models">模型</a><a href="#install">安装</a></div>
+        <div><strong>资源</strong><a href="https://github.com/z416946520/Demon-Code" target="_blank" rel="noreferrer">GitHub</a><a href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noreferrer">DeepSeek Harness</a><a href="https://github.com/lexmount/moli" target="_blank" rel="noreferrer">Moli</a><a href="https://github.com/morluto/rea" target="_blank" rel="noreferrer">REA</a></div>
+        <div><strong>许可</strong><span>MIT</span><span>Windows x64</span><span>独立定制发行版</span></div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© 2026 Demon Code</span>
+      <span>Built on DeepSeek Harness · Moli · REA</span>
+    </div>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>

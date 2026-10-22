@@ -346,3 +346,35 @@ Site:      https://github.com/z416946520/Demon-Code/commit/a700645
 - 当前旧版 `v0.2.1-rc.2` 不含更新器，用户需要安装一次本内部构建；之后才会自动更新。
 - 便携版替换的是整个应用目录；用户放在同一目录里的额外文件会进入 `.old-*` 备份。
 - 更新检查依赖 GitHub API 的公开额度；自动检查频率为每 10 分钟一次。
+
+## 11. Agent Hub、主题、原生侧栏与托盘（.4）
+
+构建与打包：
+
+```text
+pnpm run build                         9/9 gates passed
+package:win:x64:unsigned .4            EXIT 0
+runtime smoke                          [agent-hub] apply {connection:true, skills:true, loader:true}
+                                       [agent-hub] fetch route registered function
+                                       [agent-hub] 294 experts
+```
+
+桌面验收（打包后的 `win-unpacked`，CDP）：
+
+- Agent Hub：294 位专家、20 个分类；首屏渲染 60 张卡片；“逆向工程师”“首席工程师”等 dc-* 专家在列。
+- 侧栏：只显示“专家 / 技能 / 连接器”三个能力入口；“扩展管理”与配套插件安装行不显示；设置中的 Codex UI 入口已隐藏。
+- 专家选择：`/api/agent-hub` 的 `state` 返回 200；专家 persona 写入会话级 `deployment:persona-prefix`。
+- 主题：切到“极光”后 `body[data-ds-theme=aurora]`，`--dsw-alias-bg-base=#080d12`；返回主界面不白屏。
+- 工作台状态条：Git / 进程 / 已完成 / 终端四项常驻输入框上方。
+- 托盘：`apps/desktop/resources/tray-windows.ico` 由 Demon Code 图形重新生成（16–64 px）。
+
+发布：
+
+```text
+Release:   https://github.com/z416946520/Demon-Code/releases/tag/v0.2.1-rc.2.20261022.4
+Installer: 289,964,030 bytes
+Portable:  380,456,818 bytes
+Site:      https://z416946520.github.io/Demon-Code/
+```
+
+下载与站点均返回 HTTP 200；`SHA256SUMS.txt` 与两个资产同名，可直接校验。

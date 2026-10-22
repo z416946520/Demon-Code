@@ -297,3 +297,52 @@ node.exe  C:\Users\theKing\.workbuddy\binaries\node\workspace\node_modules\rea-a
 `demon/scripts/bootstrap.mjs` 会把旧 profile 里的 `default` /
 `selectedDefault`（demon-code、demon-assistant、demon-office、
 demon-research、standard、ptc、minimal）改写为 `demon`。
+
+## 10. 自动更新与内部版本
+
+内部构建：
+
+```text
+版本:      0.2.1-rc.2.20261022.1
+Build ID:  0.2.1-rc.2.20261022.1+aa36fb0a.mvj5q2ez
+Commit:    aa36fb0af55c6c0645c373c7d27050a633546bea
+```
+
+打包后的 `resources/app.asar/package.json` 实测包含上述 `version` 与
+`demonBuildId`；`关于 Demon Code` 会显示版本和 Build ID。
+
+GitHub 检查自检（把当前版本临时压到 `0.2.1-rc.1`）：
+
+```text
+[demon-update-selftest] check {"phase":"available","version":"0.2.1-rc.2"}
+```
+
+本地假 Release 自检（验证下载与 SHA-256 校验，不执行安装）：
+
+```text
+[demon-update-selftest] check    {"phase":"available","version":"0.2.1-rc.99"}
+[demon-update-selftest] download {"phase":"ready","version":"0.2.1-rc.99"}
+```
+
+发布与仓库：
+
+```text
+Release:  https://github.com/z416946520/Demon-Code/releases/tag/v0.2.1-rc.2.20261022.1
+Installer: 287,262,834 bytes
+Portable:  377,239,136 bytes
+Source:    https://github.com/z416946520/Demon-Code/commit/d8564442
+Site:      https://github.com/z416946520/Demon-Code/commit/a700645
+```
+
+更新行为：
+
+- 启动后自动检查，之后每 10 分钟一次；也可从菜单“检查更新”手动触发。
+- 安装版：下载 installer → SHA-256 → 退出 → NSIS `/S` 静默安装 → 重启。
+- 便携版：下载 zip → SHA-256 → 退出 → 替换应用目录，保留 `.old-*` 备份 → 重启。
+- 未签名构建只校验发布资产的 SHA-256，不校验代码签名。
+
+已知边界：
+
+- 当前旧版 `v0.2.1-rc.2` 不含更新器，用户需要安装一次本内部构建；之后才会自动更新。
+- 便携版替换的是整个应用目录；用户放在同一目录里的额外文件会进入 `.old-*` 备份。
+- 更新检查依赖 GitHub API 的公开额度；自动检查频率为每 10 分钟一次。

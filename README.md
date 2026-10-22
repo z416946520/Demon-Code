@@ -26,7 +26,7 @@ Codex 风味的界面 · 三种 Agent 预设 · 内置 Moli 无头浏览器 · �
 
 ![Demon Code 工作区](docs/assets/desktop.png)
 
-Demon Code 是一个面向 Windows 的 AI 开发工作台：编程、办公、研究、日常助手共用同一个工作区、同一套工具、同一份会话与长期记忆。它构建在 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)（MIT）的插件化内核上，桌面端重新做了 Codex 风味的暗色界面，并加入了国产模型路由、内置 Moli 浏览器、三种 Agent 预设和长期记忆。
+Demon Code 是一个面向 Windows 的 AI 开发工作台：编程、办公、研究、日常助手共用同一个工作区、同一套工具、同一份会话与长期记忆。它构建在 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)（MIT）的插件化内核上，桌面端重新做了 Codex 风味的暗色界面，并加入了国产模型路由、内置 Moli 浏览器、三种 Agent 预设、294 位内置专家、Skills/MCP 管理、五种主题皮肤和长期记忆。
 
 > 独立定制发行版，与 DeepSeek、OpenAI、Moli 官方无隶属关系。上游许可证与声明见 [LICENSE](LICENSE)、[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
 
@@ -34,6 +34,8 @@ Demon Code 是一个面向 Windows 的 AI 开发工作台：编程、办公、�
 
 - [为什么是 Demon Code](#为什么是-demon-code)
 - [三个预设](#三个预设)
+- [Agent Hub：专家、Skills、MCP](#agent-hub专家skillsmcp)
+- [界面、主题与工作台](#界面主题与工作台)
 - [内置 Moli 浏览器](#内置-moli-浏览器)
 - [模型](#模型)
 - [快速开始](#快速开始)
@@ -72,6 +74,25 @@ Demon Code 是一个面向 Windows 的 AI 开发工作台：编程、办公、�
 默认是 **通用**。在 **设置 → 通用 → Agent 预设** 里切换；新会话生效。旧的 `demon-code` / `demon-assistant` / `demon-office` / `demon-research` / `standard` / `ptc` / `minimal` 会被自动迁移到 `demon`。
 
 ![三个预设](docs/assets/presets.png)
+
+## Agent Hub：专家、Skills、MCP
+
+设置 → **Agent Hub**，或左侧栏的 **专家 / 技能 / 连接器**。三块能力在同一个页面里：
+
+- **专家**：294 位内置专家、20 个分类，覆盖技术、设计、产品、游戏、数据、营销、安全等。选中后把该专家的 persona 注入当前会话的系统提示词；下一轮就按它的方法和输出规范工作。内置 12 位中文优先的 `dc-*` 专家（首席工程师、逆向工程师、前端、后端、数据分析、办公自动化、深度研究、中文写作、安全审计、DevOps、产品经理、游戏开发）。
+- **Skills**：从本地目录或 Git 仓库安装 `<name>/SKILL.md`；按全局 / 当前项目启用；“仅手动”开关让技能不进入模型自动发现，只在显式 `/技能名` 时加载。安装库在 `$DSH_HOME/agent-hub/skills`，不改写 `SKILL.md`。
+- **MCP**：添加 stdio 或 streamable-http 服务器，保存后由 Loader 立即挂载；工具以 `mcp__<server>__<tool>` 出现在模型工具列表。
+- **WorkBuddy 导入**：扫描本机 `~/.workbuddy` 的本地专家包与用户 Skills，转换后进入同一套目录；不联网上传。
+
+专家目录的长尾来自 [agency-agents](https://github.com/msitarzewski/agency-agents)（MIT），逐人保留出处；`dc-*` 为 Demon Code 自研内容。完整 attribution 在 `packages/client/ui-agent-hub/assets/ATTRIBUTION.md`。
+
+## 界面、主题与工作台
+
+- **五种主题皮肤**：黑曜 / 余烬 / 极光 / 石墨 / 夜樱。每套有自己的底色、边框、文本层级与环境光；动态背景是一层固定 CSS 渐变 + `transform` 动画，尊重 `prefers-reduced-motion`，不常驻动画库。
+- **Codex 风格侧栏**：工作区树、置顶、会话搜索、轮次导航；“扩展管理”与配套插件安装入口已移除，只保留专家 / 技能 / 连接器三个原生能力入口。
+- **模型选择器**：模型列表、视觉标签、思考强度滑杆（Ctrl+T 循环）、“管理模型”飞页。
+- **工作台状态条**：输入框上方常驻 Git 分支与增删行、进程、已完成 Todo、终端计时与后台数。
+- **Windows 托盘**：使用 Demon Code 图标；关闭窗口后仍在托盘，点击恢复。
 
 ## 内置 Moli 浏览器
 
